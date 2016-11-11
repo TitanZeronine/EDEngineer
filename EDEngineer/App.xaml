@@ -15,8 +15,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
                 <!-- Accent and AppTheme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="Dictionary_ED.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:RarityToIconConverter x:Key="RarityToIcon" />
             <converters:DoubleToPercentConverter x:Key="DoubleToPercent" />
@@ -486,11 +486,11 @@
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <Button Command="ApplicationCommands.SelectAll" Focusable="False"
-            										Style="{DynamicResource {ComponentResourceKey ResourceId=MetroDataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}"
-            										Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type DataGrid}}}">
+                                                    Style="{DynamicResource {ComponentResourceKey ResourceId=MetroDataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}"
+                                                    Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type DataGrid}}}">
                                                     <Button.Visibility>
                                                         <Binding Path="HeadersVisibility"
-            												RelativeSource="{RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type DataGrid}}">
+                                                            RelativeSource="{RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type DataGrid}}">
                                                             <Binding.ConverterParameter>
                                                                 <DataGridHeadersVisibility>All</DataGridHeadersVisibility>
                                                             </Binding.ConverterParameter>
@@ -498,10 +498,10 @@
                                                     </Button.Visibility>
                                                 </Button>
                                                 <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
-            										Grid.Column="1">
+                                                    Grid.Column="1">
                                                     <DataGridColumnHeadersPresenter.Visibility>
                                                         <Binding Path="HeadersVisibility"
-            												RelativeSource="{RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type DataGrid}}">
+                                                            RelativeSource="{RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type DataGrid}}">
                                                             <Binding.ConverterParameter>
                                                                 <DataGridHeadersVisibility>Column</DataGridHeadersVisibility>
                                                             </Binding.ConverterParameter>
@@ -510,35 +510,38 @@
                                                 </DataGridColumnHeadersPresenter>
                                                 <Grid Grid.ColumnSpan="2" Grid.Row="1">
                                                     <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
-            											CanContentScroll="{TemplateBinding CanContentScroll}"
-            											CanHorizontallyScroll="False"
-            											Grid.ColumnSpan="2"
-            											CanVerticallyScroll="False"
-            											ContentTemplate="{TemplateBinding ContentTemplate}"
-            											Content="{TemplateBinding Content}"
-            											ContentStringFormat="{TemplateBinding ContentStringFormat}" />
+                                                        CanContentScroll="{TemplateBinding CanContentScroll}"
+                                                        CanHorizontallyScroll="False"
+                                                        Grid.ColumnSpan="2"
+                                                        CanVerticallyScroll="False"
+                                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                        Content="{TemplateBinding Content}"
+                                                        ContentStringFormat="{TemplateBinding ContentStringFormat}" />
                                                 </Grid>
                                                 <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="2"
-            										Maximum="{TemplateBinding ScrollableHeight}"
-            										Orientation="Vertical" Grid.Row="1"
-            										Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-            										Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-            										ViewportSize="{TemplateBinding ViewportHeight}" />
+                                                    Maximum="{TemplateBinding ScrollableHeight}"
+                                                    Orientation="Vertical" Grid.Row="1"
+                                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                    ViewportSize="{TemplateBinding ViewportHeight}" />
                                                 <Grid Grid.Column="1" Grid.Row="2">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition
-            												Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type DataGrid}}}" />
+                                                            Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type DataGrid}}}" />
                                                         <ColumnDefinition Width="*" />
                                                     </Grid.ColumnDefinitions>
                                                     <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Column="1"
-            											Maximum="{TemplateBinding ScrollableWidth}"
-            											Orientation="Horizontal"
-            											Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-            											Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-            											ViewportSize="{TemplateBinding ViewportWidth}" />
+                                                        Maximum="{TemplateBinding ScrollableWidth}"
+                                                        Orientation="Horizontal"
+                                                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                        Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ViewportSize="{TemplateBinding ViewportWidth}" />
                                                 </Grid>
                                             </Grid>
                                         </ControlTemplate>
+
+
+
                                     </ScrollViewer.Template>
                                     <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                 </ScrollViewer>

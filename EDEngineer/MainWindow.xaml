@@ -30,18 +30,18 @@
                                 HorizontalAlignment="Left"
                                 Width="20"
                                 Height="20"
-                                VerticalAlignment="Center" />
+                                VerticalAlignment="Center" Margin="5,0,0,0" />
                             <TextBlock Text="{Binding Value.Data.Name}"
                                        FontFamily="./Resources/Fonts/#Euro Caps"
                                        FontSize="20"
-                                       Margin="2,0,0,0"
+                                       Margin="4,0,0,0"
                                        VerticalAlignment="Center"
                                        Foreground="#ff7100" />
                         </StackPanel>
 
-                        <Grid>
+                        <Grid HorizontalAlignment="right">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="PART_TextBoxColumn" Width="*" />
+                                <ColumnDefinition x:Name="PART_TextBoxColumn" Width="Auto" />
                                 <ColumnDefinition x:Name="PART_NumericUpColumn" Width="Auto" />
                                 <ColumnDefinition x:Name="PART_NumericDownColumn" Width="Auto" />
                             </Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
                                                             VerticalAlignment="Center"
                                                             Visibility="{Binding Value.FavoriteCount, Converter={StaticResource IntegerToVisibility}, Mode=OneWay}"
                                                             Foreground="#ff7100" />
-                                <TextBox HorizontalAlignment="Right"
+                                <TextBox HorizontalAlignment="Left"
                                          Foreground="#ff7100"
                                          Background="Transparent"
                                          VerticalAlignment="Center"
@@ -75,15 +75,15 @@
                                          PreviewTextInput="EntryCountTextBoxOnPreviewTextInput"
                                          CaretBrush="White"
                                          FontFamily="/EDEngineer;component/NewFolder1/#Telegrama Render"
-                                         Text="{Binding Value.Count, Mode=OneWay}" />
+                                         Text="{Binding Value.Count, Mode=OneWay}" Margin="0,0,15,0" />
                             </StackPanel>
                             <Button x:Name="IncrementButton"
-                                    Grid.Column="1"
-                                    Margin="2 2 2 2"
+                                    Grid.Column="0"
+                                    Margin="0,2"
                                     Tag="{Binding Value}"
                                     Style="{DynamicResource ChromelessButtonStyle}"
                                     Click="IncrementButtonClicked"
-                                    IsTabStop="False">
+                                    IsTabStop="False" HorizontalAlignment="Right" Width="14">
                                 <Path x:Name="PolygonUp"
                                       Width="14"
                                       Height="14"
@@ -92,13 +92,13 @@
                                       Stretch="Fill" />
                             </Button>
                             <Button x:Name="DecrementButton"
-                                    Grid.Column="2"
-                                    Margin="0 2 2 2"
+                                    Grid.Column="0"
+                                    Margin="0,2,59.34,2"
                                     VerticalContentAlignment="Center"
                                     Click="DecrementButtonClicked"
                                     Tag="{Binding Value}"
                                     Style="{DynamicResource ChromelessButtonStyle}"
-                                    IsTabStop="False">
+                                    IsTabStop="False" HorizontalAlignment="Right" Width="14">
                                 <Path x:Name="PolygonDown"
                                       Width="14"
                                       Height="3"
@@ -146,8 +146,7 @@
                     Visibility="{Binding Commanders.Count, Converter={StaticResource IntegerToVisibility}, Mode=OneWay, ConverterParameter=1}"
                     Height="35"
                     Grid.Row="0"
-                    Grid.ColumnSpan="3"
-                    Margin="10,0,0,0">
+                    Grid.ColumnSpan="3" Style="{DynamicResource TabControlStyle_ED}">
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <TabItem Height="0" />
@@ -157,7 +156,7 @@
                 <DataTemplate>
                     <TextBlock Text="{Binding Value}"
                                FontFamily="./Resources/Fonts/#Euro Caps"
-                               FontSize="25" />
+                               FontSize="25" Foreground="#CCFF8700" />
                 </DataTemplate>
             </TabControl.ItemTemplate>
         </TabControl>
@@ -183,7 +182,8 @@
                               FontFamily="./Resources/Fonts/#Euro Caps"
                               Grid.Column="0"
                               ToolTip="Show entries with no stock?"
-                              IsChecked="{Binding ShowZeroes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                              IsChecked="{Binding ShowZeroes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Style="{DynamicResource ToggleButtonStyle_ED}" Background="White">
                     <iconPacks:PackIconMaterial Kind="Texture" />
                 </ToggleButton>
                 <ToggleButton HorizontalAlignment="Stretch"
@@ -191,27 +191,27 @@
                               FontFamily="./Resources/Fonts/#Euro Caps"
                               Grid.Column="1"
                               ToolTip="Show only for favorites?"
-                              IsChecked="{Binding ShowOnlyForFavorites, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <iconPacks:PackIconMaterial Kind="Star" Foreground="#ff7100" />
+                              IsChecked="{Binding ShowOnlyForFavorites, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource ToggleButtonStyle_ED}">
+                    <iconPacks:PackIconMaterial Kind="Star"/>
                 </ToggleButton>
             </Grid>
 
             <!-- CURRENT CARGO -->
 
             <controls:MetroTabControl Grid.Row="1"
-                                      DataContext="{Binding CurrentCommander.Value}">
+                                      DataContext="{Binding CurrentCommander.Value}" ItemContainerStyle="{DynamicResource TabItemStyle_ED}">
                 <TabControl.Resources>
                     <Style TargetType="{x:Type TabPanel}">
                         <Setter Property="HorizontalAlignment" Value="Center" />
                     </Style>
                 </TabControl.Resources>
                 <controls:MetroTabItem Header="Commodities"
-                                       FontFamily="./Resources/Fonts/#Euro Caps">
+                                       FontFamily="./Resources/Fonts/#Euro Caps" HeaderTemplate="{DynamicResource DataTemplateHeader_ED}">
                     <ScrollViewer>
                         <ItemsControl Background="Transparent"
                                       x:Name="Commodities"
-                                      ItemTemplate="{StaticResource EntryTemplate}"
-                                      ItemsSource="{Binding State.Cargo}">
+                                      ItemTemplate="{DynamicResource EntryTemplate}"
+                                      ItemsSource="{Binding State.Cargo}" Style="{DynamicResource ItemsControlStyle_ED}">
                             <ItemsControl.ItemContainerStyle>
                                 <Style>
                                     <Setter Property="FrameworkElement.Margin" Value="3" />
@@ -514,6 +514,105 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="G" Binding="{Binding Grade}" IsReadOnly="True" Width="30"
                                             CanUserResize="False">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Setter Property="controls:DataGridCellHelper.SelectionUnit"
+                                        Value="{Binding (controls:DataGridRowHelper.SelectionUnit), Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type DataGridRow}}}" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="SnapsToDevicePixels" Value="True" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                        Content="{TemplateBinding Content}"
+                                                        ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                        Margin="{TemplateBinding Padding}"
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Foreground"
+                                                Value="{DynamicResource MetroDataGrid.HighlightTextBrush}" />
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="controls:DataGridCellHelper.IsCellOrRowHeader" Value="True" />
+                                                <Condition Property="IsSelected" Value="True" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Background"
+                                                Value="{DynamicResource MetroDataGrid.HighlightBrush}" />
+                                            <Setter Property="BorderBrush"
+                                                Value="Transparent" />
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="controls:DataGridCellHelper.IsCellOrRowHeader" Value="True" />
+                                                <Condition Property="IsKeyboardFocusWithin" Value="True" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="BorderBrush"
+                                                Value="{DynamicResource MetroDataGrid.FocusBorderBrush}" />
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsSelected" Value="True" />
+                                                <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Foreground"
+                                                Value="{DynamicResource MetroDataGrid.InactiveSelectionHighlightTextBrush}" />
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="controls:DataGridCellHelper.IsCellOrRowHeader" Value="True" />
+                                                <Condition Property="IsSelected" Value="True" />
+                                                <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Background"
+                                                Value="{DynamicResource MetroDataGrid.InactiveSelectionHighlightBrush}" />
+                                            <Setter Property="BorderBrush"
+                                                Value="{DynamicResource MetroDataGrid.InactiveSelectionHighlightBrush}" />
+                                        </MultiTrigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Foreground"
+                                                Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsEnabled" Value="False" />
+                                                <Condition Property="IsSelected" Value="True" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Foreground"
+                                                Value="{DynamicResource MetroDataGrid.HighlightTextBrush}" />
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="controls:DataGridCellHelper.IsCellOrRowHeader" Value="True" />
+                                                <Condition Property="IsEnabled" Value="False" />
+                                                <Condition Property="IsSelected" Value="True" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Background"
+                                                Value="{DynamicResource MetroDataGrid.DisabledHighlightBrush}" />
+                                            <Setter Property="BorderBrush"
+                                                Value="{DynamicResource MetroDataGrid.DisabledHighlightBrush}" />
+                                        </MultiTrigger>
+                                    </Style.Triggers>
+                                </Style>
+
+
+
+                            </DataGridTextColumn.CellStyle>
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -616,7 +715,7 @@
                     FontFamily="./Resources/Fonts/#Euro Caps"
                     x:Name="ResetWindowPositionButton"
                     Click="ResetWindowPositionButtonClicked"
-                    Grid.Column="0" />
+                    Grid.Column="0" Style="{DynamicResource ButtonStyle_ED}" />
             <Button HorizontalAlignment="Stretch"
                     FontSize="14"
                     FontFamily="./Resources/Fonts/#Euro Caps"
@@ -624,7 +723,7 @@
                     Content="Unlock Window"
                     Click="ToggleEditModeChecked"
                     d:IsHidden="False"
-                    Grid.Column="1" />
+                    Grid.Column="1" Style="{DynamicResource ButtonStyle_ED}" />
             <TextBlock HorizontalAlignment="Stretch"
                        FontSize="16"
                        Grid.Column="2"
